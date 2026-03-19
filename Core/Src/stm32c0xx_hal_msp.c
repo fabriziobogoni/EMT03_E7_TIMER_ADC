@@ -120,7 +120,7 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
 
     /* ADC1 DMA Init */
     /* ADC1 Init */
-    hdma_adc1.Instance = DMA1_Channel2;
+    hdma_adc1.Instance = DMA1_Channel1;
     hdma_adc1.Init.Request = DMA_REQUEST_ADC1;
     hdma_adc1.Init.Direction = DMA_PERIPH_TO_MEMORY;
     hdma_adc1.Init.PeriphInc = DMA_PINC_DISABLE;
@@ -282,7 +282,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
 
     /* USART2 DMA Init */
     /* USART2_TX Init */
-    hdma_usart2_tx.Instance = DMA1_Channel1;
+    hdma_usart2_tx.Instance = DMA1_Channel2;
     hdma_usart2_tx.Init.Request = DMA_REQUEST_USART2_TX;
     hdma_usart2_tx.Init.Direction = DMA_MEMORY_TO_PERIPH;
     hdma_usart2_tx.Init.PeriphInc = DMA_PINC_DISABLE;
@@ -298,6 +298,9 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
 
     __HAL_LINKDMA(huart,hdmatx,hdma_usart2_tx);
 
+    /* USART2 interrupt Init */
+    HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(USART2_IRQn);
     /* USER CODE BEGIN USART2_MspInit 1 */
 
     /* USER CODE END USART2_MspInit 1 */
@@ -330,6 +333,9 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
 
     /* USART2 DMA DeInit */
     HAL_DMA_DeInit(huart->hdmatx);
+
+    /* USART2 interrupt DeInit */
+    HAL_NVIC_DisableIRQ(USART2_IRQn);
     /* USER CODE BEGIN USART2_MspDeInit 1 */
 
     /* USER CODE END USART2_MspDeInit 1 */

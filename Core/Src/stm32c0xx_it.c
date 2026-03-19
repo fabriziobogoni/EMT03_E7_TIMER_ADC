@@ -58,6 +58,7 @@
 extern DMA_HandleTypeDef hdma_adc1;
 extern ADC_HandleTypeDef hadc1;
 extern DMA_HandleTypeDef hdma_usart2_tx;
+extern UART_HandleTypeDef huart2;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -150,7 +151,7 @@ void DMA1_Channel1_IRQHandler(void)
   /* USER CODE BEGIN DMA1_Channel1_IRQn 0 */
 
   /* USER CODE END DMA1_Channel1_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_usart2_tx);
+  HAL_DMA_IRQHandler(&hdma_adc1);
   /* USER CODE BEGIN DMA1_Channel1_IRQn 1 */
 
   /* USER CODE END DMA1_Channel1_IRQn 1 */
@@ -164,7 +165,7 @@ void DMA1_Channel2_3_IRQHandler(void)
   /* USER CODE BEGIN DMA1_Channel2_3_IRQn 0 */
 
   /* USER CODE END DMA1_Channel2_3_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_adc1);
+  HAL_DMA_IRQHandler(&hdma_usart2_tx);
   /* USER CODE BEGIN DMA1_Channel2_3_IRQn 1 */
 
   /* USER CODE END DMA1_Channel2_3_IRQn 1 */
@@ -182,6 +183,20 @@ void ADC1_IRQHandler(void)
   /* USER CODE BEGIN ADC1_IRQn 1 */
 
   /* USER CODE END ADC1_IRQn 1 */
+}
+
+/**
+  * @brief This function handles USART2 interrupt.
+  */
+void USART2_IRQHandler(void)
+{
+  /* USER CODE BEGIN USART2_IRQn 0 */
+
+  /* USER CODE END USART2_IRQn 0 */
+  HAL_UART_IRQHandler(&huart2);
+  /* USER CODE BEGIN USART2_IRQn 1 */
+
+  /* USER CODE END USART2_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */
